@@ -1,19 +1,11 @@
-{% load static %}
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
-    </head>
-    <body>
-        <nav>
-            <div>
-                <img class="h-8 w-8" src="{% static 'myapp/img/logo.png' %}" alt="logo">
-                <span class="text-xl">Pro Shop</span>
-            </div>
 
-        </nav>
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+    {% for product in products %}
+    <p><a href="{% url 'product' product.id %} ">{{product.id}}</a> | {{product.name}} | {{product.price}} | {{product.description}} | <img class="h-20 w-20" src="{{product.image.url}}" alt=""></p>
+    {% endfor %}
+    
+{% endblock content %}
         
-        {% for pr in products %}
-        <p><a href="{% url 'product' pr.id %} ">{{pr.id}}</a> | {{pr.name}} | {{pr.price}} | {{pr.description}}</p>
-        {% endfor %}
-    </body>
-</html>

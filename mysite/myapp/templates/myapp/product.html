@@ -1,14 +1,14 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
-    </head>
-    <body>
+{% extends 'myapp/base.html' %}
+
+{% block content %}
         
-        <h1>Product Detail</h1>
-        <p>Id: <b>{{product.id}}</b></p>
-        <p>Name: <b>{{product.name}}</b></p> 
-        <P>Proce: <b>{{product.price}}</b></P>
-        <P>Description: <b>{{product.description}}</b></p>
-    </body>
-  
-</html>
+    <h1>Product Detail</h1>
+    <p>Id: <b>{{product.id}}</b></p>
+    <p>Name: <b>{{product.name}}</b></p> 
+    <P>Proce: <b>{{product.price}}</b></P>
+    <P>Description: <b>{{product.description}}</b></p>
+    <img src="{{product.image.url}}" alt="">
+    
+   
+{% endblock content %}
+           
