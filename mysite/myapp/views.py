@@ -13,8 +13,21 @@ def contact(request):
 def products_list(request):
       
       products = Product.objects.all()
-      return render(request, 'myapp/products_list.html', {'products': products})
+      return render(request, 'myapp/products_list.html', {'items': products})
 
 def product(request, id):
       product = Product.objects.get(id = id)
-      return render(request, 'myapp/product.html', {'product': product})
+      return render(request, 'myapp/product.html', {'item': product})
+
+
+def add_item(request):
+
+      if request.method == 'POST':
+            name = request.POST.get('name')
+            price = request.POST.get('price')
+            description = request.POST.get('description')
+            image = request.FILES['image']
+            item = Product(name=name, price=price, description=description, image=image)
+            item.save()
+
+      return render(request, 'myapp/add_item.html')
