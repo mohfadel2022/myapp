@@ -4,16 +4,28 @@
         <div class="flex justify-between">
             <div class="flex space-x-7">
                 <div>
-                    <a href="" class="flex items-center px-2 py-4">
+                    <a href="/" class="flex items-center px-2 py-4">
                         <img class="h-8 w-8 mr-2" src="{% static 'myapp/img/logo.png' %}" alt="logo" />
                         <span class="text-xl text-gray-500 font-semibold text-green-500">Pro Shop</span>
                     </a>
                 </div>
                 <div class="flex items-center space-x-1">
-                    <a href="" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
+                    <a href="/" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
                     <a href="" class="py-4 px-2 text-gray-500 font-semibold">About</a>
                     <a href="" class="py-4 px-2 text-gray-500 font-semibold">Contact</a>
                 </div>
+            </div>
+            <div class="flex items-center space-x-1">
+                {% if user.is_authenticated %}
+                <span class="text-xl text-gray-500 font-semibold">Hello {{user.username}} !</span>
+                <a href="{% url 'user:logout' %}" class="py-4 px-2 text-gray-500 font-semibold">logout</a>
+                <a href="{% url 'user:profile' %}" class="py-4 px-2 text-gray-500 font-semibold">Profile</a>
+                
+                {% else %}
+                <a href="{% url 'user:login' %}" class="py-4 px-2 text-gray-500 font-semibold">Login</a>
+                <a href="{% url 'user:register' %}" class="py-4 px-2 text-gray-500 font-semibold">Register</a>
+                {% endif %}
+
             </div>
         </div>
     </div>

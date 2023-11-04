@@ -1,0 +1,22 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<!-- <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"> -->
+    <div class="ml-[200px]">    
+        <h1 class="text-2xl m-10 font-bold text-green-600">Update Item</h1>
+        <form class="w-1/3 bg-white shadow-md m-10 px-8 py-8" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="block text-gray-700 text-md font-bold mb-2" for="name">Product name</label>
+            <input class="w-full shadow appearance-none border rounded py-2 px-3 mr-10 text-gray-700" type="text" placeholder="Name" name="name" id="name" value="{{item.name}}" required>
+            <label class="block text-gray-700 text-md font-bold mb-2 mt-2" for="price">Product price ($)</label>
+            <input class="w-full sshadow appearance-none border rounded py-2 px-3 mr-10 text-gray-700" type="number" placeholder="Price" name="price" id="price" value="{{item.price}}" required>
+            <label class="block text-gray-700 text-md font-bold mb-2 mt-2" for="description">Description</label>
+            <textarea class="w-full shadow appearance-none border rounded py-2 px-3 mr-10 text-gray-700" placeholder="Description" name="description" id="description">{{item.description}}</textarea>
+            <img  class="mb-4 mt-4 w-40" src="{{item.image.url}}" alt="">
+            <input class="block mt-4" type="file" accept="image/*" placeholder="Image" name="image" id="image"  value="{{item.image}}">
+            <button class="block bg-green-600 text-white p-3 mt-4 rounded" type="submit" name="addItem">Update Item</button>
+        </form>
+    </div>
+<!-- </main> -->
+{% endblock content %}

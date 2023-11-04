@@ -1,0 +1,21 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<!-- <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"> -->
+    <div class="ml-[200px]">    
+        <h1 class="text-2xl m-10 font-bold text-green-600">Delete Item</h1>
+        <form class=" bg-white shadow-md m-10 px-8 py-8" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="block text-gray-700 text-md font-bold mb-2">Are You sure to delete item:</label>
+    
+            <label class="block text-gray-700 text-md font-bold mb-2 mt-2">{{item.name}}</label>
+    
+            <img  class="mb-4 mt-4 w-40" src="{{item.image.url}}" alt="">
+
+            <button class="bg-red-600 text-white p-3 mt-4 rounded" type="submit" value="confirm">Confirm</button>
+            <a class="bg-green-600 text-white p-3 mt-4 rounded" href="/">Cancel</a>
+        </form>
+    </div>
+<!-- </main> -->
+{% endblock content %}
