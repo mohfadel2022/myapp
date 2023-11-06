@@ -5,6 +5,7 @@
     "tailwindcss": "^3.3.5"
   },
   "scripts": {
-    "build": "npx tailwindcss -i myapp/static/myapp/src/tailwind.css -o myapp/static/myapp/style.css --watch"
+    "build-css": "npx tailwindcss -i myapp/static/myapp/src/tailwind.css -o myapp/static/myapp/style.css --watch",
+    "dev": "concurrently \"npm run build-css\" \"npm start\""
   }
 }

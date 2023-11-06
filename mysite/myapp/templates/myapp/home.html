@@ -1,0 +1,91 @@
+
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+    <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+        <div class="text-center lg:text-left">
+            <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl ms:text-6x1">
+                <span class="block xl:inline">Exclusive Products</span>
+                <span class="block xl:inline text-green-500">Super Prices</span>
+            </h1>
+            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-x1 sm:mx-auto md:mt-5 md:text-x1 lg:mx-0">You can demand any product from anywhere</p>
+        </div>
+
+        <!-- ---------- Search Bar ---------- -->
+
+
+            <form>   
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </div>
+                    <input name="search" type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos...">
+                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                </div>
+            </form>
+
+        <!-- ---------- Search Bar /END ---------- -->
+
+        <div class="p-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {% for item in page_obj %}
+            <a href="{% url 'myapp:product' item.id %} ">{{item.id}}
+                <div class="rounded overflow-hidden shadow-lg">
+                    <div class="px-6 py-4">
+                    <img class="w-full h-[240px]" src="{{item.image.url}}" alt="">
+                        <p class="font-bold text-xl mb-2">{{item.name}}</p>
+                        <p class="font-bold tetx-lg text-indigo-500 mb-2 float-right">By: {{item.user}}</p>
+                        <p class="font-bold tetx-xl text-green-500 mb-2">{{item.price}}</p>
+                        <p class="text-gray-500 text-base">{{item.description}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+        <nav aria-label="Page navigation example">
+            {% if page_obj.has_other_pages %}
+                <ul class="flex items-center -space-x-px h-8 text-sm">
+                    {% if page_obj.has_previous %}
+                        <li>
+                            <a href="?page={{page_obj.previous_page_number}}" class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if i == page_obj.number %}
+                            <li>
+                                <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{ i }}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                            <a href="?page={{i}}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ i }}</a>
+                            </li>
+                        {% endif%}
+                    {% endfor%}
+                    {% if page_obj.has_next %}
+                        <li>
+                            <a href="?page={{page_obj.next_page_number}}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </nav>
+          
+  
+    </main>
+    
+    
+{% endblock content %}
+        

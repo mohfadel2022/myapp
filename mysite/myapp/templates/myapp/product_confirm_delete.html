@@ -1,0 +1,12 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="ml-[200px]"> 
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Do you want to delete a item : {{object}}</p>
+       
+        <input class="block bg-red-600 text-white p-3 mt-4 rounded" type="submit" value="Delete">
+    </form>
+</div>
+{% endblock content %}
